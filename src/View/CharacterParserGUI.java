@@ -5,6 +5,9 @@
  */
 package View;
 
+import Controller.CharacterParser;
+import Model.*;
+
 /**
  *
  * @author EAN
@@ -38,6 +41,11 @@ public class CharacterParserGUI extends javax.swing.JFrame {
         jTextField1.setFocusable(false);
 
         jButton1.setText("Check");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,6 +75,11 @@ public class CharacterParserGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+       jTextField1.setText( parser1.isBalanced(jTextField2.getText()));
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -102,7 +115,9 @@ public class CharacterParserGUI extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    private CharacterParser parser1;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JTextField jTextField1;
