@@ -43,7 +43,8 @@ public class CharacterParser {
      */
     public String isBalanced(String inputMessage) {
         String message = "";
-        int exceptionCounter = 0;
+        int exceptionCounter1 = 0;
+        int exceptionCounter2 = 0;
         stack1 = new Stack();
 
         for (int i = 0; i < inputMessage.length(); i++) {
@@ -58,19 +59,22 @@ public class CharacterParser {
                 stack1.pop();
             } else if (inputMessage.charAt(i) == '>' && stack1.pop().equals('<')) {
                 stack1.pop();
+            } else if (inputMessage.charAt(i) != '(' && inputMessage.charAt(i) != '{' && inputMessage.charAt(i) != '[' && inputMessage.charAt(i) != '<'
+                    && inputMessage.charAt(i) != ')' && inputMessage.charAt(i) != '}' && inputMessage.charAt(i) != ']' && inputMessage.charAt(i) != '>') {
+                exceptionCounter1++;
             } else {
-                exceptionCounter++;
+                exceptionCounter2++;
             }
         }
 
-        if (stack1.isEmpty() && exceptionCounter == 0) {
+        if (stack1.isEmpty() && exceptionCounter1 == 0 && exceptionCounter2 == 0) {
             message = "Balanced expression";
-        } else {
-            message = "Non balanced expression";
-        }
-        if (exceptionCounter > 0) {
+        } else if (exceptionCounter1 > 0) {
             message = "Please inspect your characters, you have " + "\n"
                     + "introduced at least a non valid character, or in a wrong order";
+        } else {
+            message = "Non balanced expression";
+
         }
 
         return message;
