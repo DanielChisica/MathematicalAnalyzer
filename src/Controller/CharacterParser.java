@@ -8,44 +8,71 @@ package Controller;
 import Model.Stack;
 
 /**
+ * Contains the working logic of a character parser
  *
  * @author Daniel Jiménez Chísica
+ * @since 19 March 2017
  */
 public class CharacterParser {
 
+    /**
+     * Returns the stack that compose the character parser
+     *
+     * @return The stack
+     */
     public Stack getStack1() {
         return stack1;
     }
 
+    /**
+     * Sets the stack that compose the character parser
+     *
+     * @param stack1 The stack
+     */
     public void setStack1(Stack stack1) {
         this.stack1 = stack1;
     }
     private Stack stack1;
-    
-    public String isBalanced(String inputMessage){
-        String message="";
-        for (int i = 0; i<inputMessage.length(); i++) {
-            
-            if (inputMessage.charAt(i)=='(' || inputMessage.charAt(i)=='{' || inputMessage.charAt(i)=='[' || inputMessage.charAt(i)=='<') {
-               stack1.push(inputMessage);
-            }
-           
-            else if(inputMessage.charAt(i)==')' || inputMessage.charAt(i)=='}' || inputMessage.charAt(i)==']' || inputMessage.charAt(i)=='>'){
-                if (inputMessage.charAt(i)==(char)stack1.pop()) {
-                    stack1.pop();
-                }
-            }
-            
-            else {
-                message="Please inspect your characters, you have introduced at least a non"
-                        + "valid character";
+
+    /**
+     * This method contains the logic procedure that determines if an expression
+     * is correctly balanced or not
+     *
+     * @param inputMessage The message input by the user
+     * @return The message with the answer to the user
+     */
+    public String isBalanced(String inputMessage) {
+        String message = "";
+        int exceptionCounter = 0;
+        stack1 = new Stack();
+
+        for (int i = 0; i < inputMessage.length(); i++) {
+
+            if (inputMessage.charAt(i) == '(' || inputMessage.charAt(i) == '{' || inputMessage.charAt(i) == '[' || inputMessage.charAt(i) == '<') {
+                stack1.push(inputMessage.charAt(i));
+            } else if (inputMessage.charAt(i) == ')' && stack1.pop().equals('(')) {
+                stack1.pop();
+            } else if (inputMessage.charAt(i) == '}' && stack1.pop().equals('{')) {
+                stack1.pop();
+            } else if (inputMessage.charAt(i) == ']' && stack1.pop().equals('[')) {
+                stack1.pop();
+            } else if (inputMessage.charAt(i) == '>' && stack1.pop().equals('<')) {
+                stack1.pop();
+            } else {
+                exceptionCounter++;
             }
         }
-        
-        if (stack1.isEmpty()) {
-            message="Balanced expression";
+
+        if (stack1.isEmpty() && exceptionCounter == 0) {
+            message = "Balanced expression";
+        } else {
+            message = "Non balanced expression";
         }
-        
+        if (exceptionCounter > 0) {
+            message = "Please inspect your characters, you have " + "\n"
+                    + "introduced at least a non valid character, or in a wrong order";
+        }
+
         return message;
     }
 }

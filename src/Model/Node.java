@@ -6,58 +6,69 @@
 package Model;
 
 /**
+ * Represents an instance of a node, an object with its element and the
+ * reference to the next object
  *
- * @author EAN
+ * @author Daniel Jiménez Chísica
+ * @since 19 March 2017
  */
-public class Node <T>{
-    
+public class Node {
+
     /**
-     * 
-     * @param element
-     * @param next 
+     * This constructor initializes a node with its object and reference
+     *
+     * @param element The element of the node
+     * @param next The reference to the next object
      */
-    public Node(T element, T next) {
+    public Node(Object element, Node next) {
         this.element = element;
         this.next = next;
     }
 
-    public Node(T element) {
+    /**
+     * This constructor initializes a node only with its object
+     *
+     * @param element The input element
+     */
+    public Node(Object element) {
         this.element = element;
     }
-    
-    
-    
+
     /**
-     * 
-     * @return 
+     * Returns the element of the node
+     *
+     * @return The element of the node
      */
-    public T getElement() {
+    public Object getElement() {
         return element;
     }
-    
+
     /**
-     * 
-     * @param element 
+     * Sets the element of the node
+     *
+     * @param element The input element
      */
-    public void setElement(T element) {
+    public void setElement(Object element) {
         this.element = element;
     }
-    
+
     /**
-     * 
-     * @return 
+     * Returns the reference to the next object
+     *
+     * @return A node with reference to the next object
      */
-    public T getNext() {
+    public Node getNext() {
         return next;
     }
-    
+
     /**
-     * 
-     * @param next 
+     * Sets the next node
+     *
+     * @param next The reference to other object
      */
-    public void setNext(T next) {
+    public void setNext(Node next) {
         this.next = next;
     }
-   private T element;
-   private T next;
+    private Object element;
+    private Node next;
 }
