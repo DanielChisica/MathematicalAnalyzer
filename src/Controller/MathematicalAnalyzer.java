@@ -8,12 +8,12 @@ package Controller;
 import Model.Stack;
 
 /**
- * Contains the working logic of a character parser
+ * Contains the working logic of the Mathematical Analyzer
  *
  * @author Daniel Jiménez Chísica
  * @since 19 March 2017
  */
-public class CharacterParser {
+public class MathematicalAnalyzer {
 
     /**
      * Returns the stack that compose the character parser
@@ -39,9 +39,41 @@ public class CharacterParser {
      * is correctly balanced or not
      *
      * @param inputMessage The message input by the user
-     * @return The message with the answer to the user
+     * @return True if the expression is balanced
      */
-    public String isBalanced(String inputMessage) {
+    public boolean isBalanced(String inputMessage) {
+        stack1 = new Stack();
+        for (int i = 0; i < inputMessage.length(); i++) {
+            if (inputMessage.charAt(i) == '(' || inputMessage.charAt(i) == '[' || inputMessage.charAt(i) == '{') {
+                stack1.push(inputMessage.charAt(i));
+            } else {
+                if (inputMessage.charAt(i) == ')') {
+                    if (!stack1.pop().equals('(')) {
+                        stack1.push(inputMessage.charAt(i));
+                    }
+                } else {
+                    if (inputMessage.charAt(i) == ']') {
+                        if (!stack1.pop().equals('[')) {
+                            stack1.push(inputMessage.charAt(i));
+                        }
+                    } else {
+                        if (inputMessage.charAt(i) == '}') {
+                            if (!stack1.pop().equals('{')) {
+                                stack1.push(inputMessage.charAt(i));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //if (nuevaPila.empty()) {
+        //JOptionPane.showMessageDialog(null, "Expresión  balanceada","",JOptionPane.INFORMATION_MESSAGE,n);
+        //} else {
+
+        //JOptionPane.showMessageDialog(null, "Expresión  desbalanceada","",JOptionPane.INFORMATION_MESSAGE,m);
+        // nuevaPila.vaciar();
+        //}
+        /*
         String message = "";
         int exceptionCounter1 = 0;
         int exceptionCounter2 = 0;
@@ -78,5 +110,11 @@ public class CharacterParser {
         }
 
         return message;
+         */
+        return stack1.isEmpty();
+    }
+
+    public String solveOperation(String operation) {
+        return "";
     }
 }
